@@ -4,9 +4,9 @@ module.exports = {
 	execute(message, args, command) {
 		var diceRegex = /[a-zA-Z]+|[0-9]+|[+-]/g;
 		var total = 0;
+		var diceModified = 0;
 		var result = '';
 		match = command.match(diceRegex);
-		console.log(match);
 		//if the first entry in the match array is NOT a number
 		//then the format must be d? where ? is what kind of
 		//dice the user would like to roll.
@@ -31,16 +31,24 @@ module.exports = {
 			if (match[3] == '+') {
 				for (let i = 0; i < match[0]; i++) {
 					var random = Math.floor(Math.random() * match[2]) + 1;
-					total += random;
-					var result = result + random + '\n';
+					diceModified = parseFloat(random) + parseFloat(match[4]);
+					total += diceModified;
+					result += random + '(' + match[3] + match[4] + ') ';
 				}
 				message.channel.send('```# ' + total + '\ndetails: ' + command + '\n' + result + '```');
 			} else if (match[3] == '-') {
+				for (let i = 0; i < match[0]; i++) {
+					var random = Math.floor(Math.random() * match[2]) + 1;
+					diceModified = parseFloat(random) - parseFloat(match[4]);
+					total += diceModified;
+					result += random + '(' + match[3] + match[4] + ') ';
+				}
+				message.channel.send('```# ' + total + '\ndetails: ' + command + '\n' + result + '```');
 			} else {
 				for (let i = 0; i < match[0]; i++) {
 					var random = Math.floor(Math.random() * match[2]) + 1;
 					total += random;
-					var result = result + random + '\n';
+					var result = result + random + ' ';
 				}
 				message.channel.send('```# ' + total + '\ndetails: ' + command + '\n' + result + '```');
 			}
