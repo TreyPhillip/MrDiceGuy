@@ -28,21 +28,40 @@ module.exports = {
 			//number of dice to roll and the second is what kind of
 			//dice the user would like to roll.
 		} else {
-			if (match[3] == '+') {
+			if (match[3] == '+' && match[4] == '+') {
 				for (let i = 0; i < match[0]; i++) {
 					var random = Math.floor(Math.random() * match[2]) + 1;
-					diceModified = parseFloat(random) + parseFloat(match[4]);
+					diceModified = parseFloat(random) + parseFloat(match[5]);
 					total += diceModified;
-					result += random + '(' + match[3] + match[4] + ') ';
+					result += random + '(' + match[3] + match[5] + ') ';
 				}
 				message.channel.send('```# ' + total + '\ndetails: ' + command + '\n' + result + '```');
-			} else if (match[3] == '-') {
+			} else if (match[3] == '-' && match[4] == '-') {
 				for (let i = 0; i < match[0]; i++) {
 					var random = Math.floor(Math.random() * match[2]) + 1;
-					diceModified = parseFloat(random) - parseFloat(match[4]);
+					diceModified = parseFloat(random) - parseFloat(match[5]);
 					total += diceModified;
-					result += random + '(' + match[3] + match[4] + ') ';
+					result += random + '(' + match[3] + match[5] + ') ';
 				}
+				message.channel.send('```# ' + total + '\ndetails: ' + command + '\n' + result + '```');
+			} else if (match[3] == '+') {
+				for (let i = 0; i < match[0]; i++) {
+					var random = Math.floor(Math.random() * match[2]) + 1;
+					total += random
+					result += random + ' '
+				}
+				total = total + parseFloat(match[4]);
+				result += '(' + match[3] + match[4] + ') ';
+				message.channel.send('```# ' + total + '\ndetails: ' + command + '\n' + result + '```');
+			} 
+			else if (match[3] == '-') {
+				for (let i = 0; i < match[0]; i++) {
+					var random = Math.floor(Math.random() * match[2]) + 1;
+					total += random
+					result += random + ' '
+				}
+				total = total - parseFloat(match[4]);
+				result += '(' + match[3] + match[4] + ') ';
 				message.channel.send('```# ' + total + '\ndetails: ' + command + '\n' + result + '```');
 			} else {
 				for (let i = 0; i < match[0]; i++) {
