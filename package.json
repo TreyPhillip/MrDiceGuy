@@ -8,7 +8,7 @@
   },
   "author": "Trey",
   "license": "GPL-3.0",
-  "repository":"https://github.com/TreyPhillip/MrDiceGuy",
+  "repository": "https://github.com/TreyPhillip/MrDiceGuy",
   "dependencies": {
     "discord.js": "^12.3.1"
   }
